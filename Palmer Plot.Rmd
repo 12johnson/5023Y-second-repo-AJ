@@ -1,0 +1,39 @@
+---
+title: "Palmer Penguins Plot Week 1 Bio-5023Y"
+aurthor: "Aaron Johnson"
+date: "04/03/21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(palmerpenguins)
+library(plotly)
+```
+
+
+```{r, include=F, warning=FALSE, echo=FALSE}
+### creating the graph, include=F because otherwise, there is two graphs when adding the interactive code.
+penguin_graph <- ggplot(data = penguins, aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point(aes(size = body_mass_g, 
+                 color = species),
+             alpha = 0.4) +
+  scale_color_manual(values = c("purple","orange","black")) +
+  theme_minimal() +
+  labs(x = "bill length (mm)",
+       y = "bill depth mm",
+       title = "Penguin measurements")
+penguin_graph
+
+
+
+
+```
+
+```{r, echo=FALSE}
+### This makes the graph interactive
+ggplotly(penguin_graph, tooltip = c("species"))
+```
+
+
